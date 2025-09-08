@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=moved_location"
+    />
+    <link
+      rel="stylesheet"
+      href="reset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+    <script
+      src="script.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <!-- <header class="text-header">
+    <div>
+      <a href="#home" class="logo">Đám cưới Huy và Hà</a>
+    </div>
+   <nav>
+    <ul>
+      <li><a href="#about">Trang chủ</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+   </nav>
+  </header> -->
+    <main>
+      <section
+        id="home"
+        class="hero normal-margin"
+      >
+        <h1 class="names text-title">
+          Ngọc Hà<span class="and">&amp;</span>Hải Huy
+        </h1>
+        <svg
+          class="divider text-charcoal"
+          viewBox="0 0 300 30"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="#A99E92"
+          stroke-width="1.2"
+        >
+          <path
+            class="draw-path"
+            d="M8 15c38-18 86-18 124 0 38 18 86 18 124 0"
+          ></path>
+        </svg>
+        <p>Kính mời quý khách tới tham dự buổi tiệc chung vui của gia đình</p>
+      </section>
+
+      <section
+        id="time"
+        class="time normal-margin"
+      >
+        <h2 class="text-header">Thời gian</h2>
+        <p>Hôn lễ sẽ được cử hành vào ngày 9 tháng 11 năm 2025</p>
+        <p class="date">
+          <span> Ngày 9 </span>
+          <span> tháng 11 </span>
+          <span> năm 2025 </span>
+        </p>
+        <div class="calendar-container">
+          <div
+            class="calendar-grid"
+            id="calendarGrid"
+          ></div>
+        </div>
+        <!-- add to calendar drop down, with option for google or ios -->
+        <nav
+          class="calendar-dropdown"
+          role="navigation"
+          aria-label="Thêm vào lịch"
+        >
+          <button
+            class="btn-outline"
+            onclick="toggleCalendarDropdown()"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls="calendarMenu"
+            id="calendarButton"
+          >
+            Thêm vào lịch
+            <span aria-hidden="true">▼</span>
+          </button>
+
+          <ul
+            class="dropdown-menu"
+            id="calendarMenu"
+            role="menu"
+            aria-labelledby="calendarButton"
+            aria-hidden="true"
+          ></ul>
+        </nav>
+      </section>
+
+      <section
+        id="location"
+        class="location"
+      >
+        <div class="header">
+          <button
+            class="map-icon text-header"
+            onclick="window.open('https://maps.app.goo.gl/cREXUgRRRUrEYaaL6', '_blank')"
+          >
+            <span
+              class="material-symbols-outlined"
+              style="text-align: center"
+            >
+              moved_location
+            </span>
+          </button>
+          <h1 class="text-header">Địa điểm</h1>
+        </div>
+        <p class="address">
+          Địa chỉ : 360D Bến Vân Đồn, phường Vĩnh Hội, Tp. Hồ Chí Minh, sảnh
+          Thames
+        </p>
+        <article class="address-content">
+          <img
+            src="assets/riverside.webp"
+            alt="Riverside Palace"
+            style="height: 100%"
+            class="fade-all-edges blended-image fade-vertical"
+          />
+          <div class="timeline-container">
+            <!-- <div class="timeline-line"></div> -->
+          </div>
+          <!-- <ul class="timeline-events">
+          </ul> -->
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
