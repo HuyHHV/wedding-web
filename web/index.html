@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -25,18 +25,31 @@
     ></script>
   </head>
   <body>
-    <!-- <header class="text-header">
-    <div>
-      <a href="#home" class="logo">Đám cưới Huy và Hà</a>
-    </div>
-   <nav>
-    <ul>
-      <li><a href="#about">Trang chủ</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-   </nav>
-  </header> -->
+    <!-- Envelope overlay -->
+    <!-- <div
+      class="envelope-overlay"
+      id="envelopeOverlay"
+    >
+      <div
+        class="envelope-container"
+        id="envelopeContainer"
+      >
+        <div class="envelope">
+          <div class="envelope-back">
+            <div class="letter-content"></div>
+          </div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-seal">
+            <img
+              src="assets/letter-seal.png"
+              alt="Envelope Seal"
+              class="seal-image"
+            />
+          </div>
+        </div>
+        <div class="click-instruction">Bạn có một thư mời</div>
+      </div>
+    </div> -->
     <main>
       <section
         id="home"
@@ -45,38 +58,62 @@
         <h1 class="names text-title">
           Ngọc Hà<span class="and">&amp;</span>Hải Huy
         </h1>
-        <svg
-          class="divider text-charcoal"
-          viewBox="0 0 300 30"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="#A99E92"
-          stroke-width="1.2"
-        >
-          <path
-            class="draw-path"
-            d="M8 15c38-18 86-18 124 0 38 18 86 18 124 0"
-          ></path>
-        </svg>
-        <p>Kính mời quý khách tới tham dự buổi tiệc chung vui của gia đình</p>
+        <p>Thân mời bạn tới tham dự buổi tiệc chung vui cùng chúng mình</p>
+      </section>
+      <section class="hero-image-container normal-margin">
+        <img
+          src="assets/hero-image.webp"
+          alt="Hero Image"
+          class="hero-image fade-all-edges blended-image fade-vertical"
+        />
+      </section>
+      <img
+        src="assets/swan.png"
+        alt="Swan Divider"
+        class="divider"
+      />
+
+      <!-- nav bar go here -->
+      <div class="navigation-bar">
+        <h1 class="text-header">
+          <a href="#details">Save the date</a>
+        </h1>
+        <h1 class="text-header">
+          <a href="#location">Chi tiết</a>
+        </h1>
+        <h1 class="text-header">
+          <a href="#rsvp">RSVP</a>
+        </h1>
+      </div>
+
+      <section class="save-the-date normal-margin flex-center">
+        <h2 class="text-header">Save the date</h2>
+        <p class="date">Ngày 9 | tháng 11 | năm 2025</p>
+        <p>
+          Thank you for being part of our special day! We can't wait to
+          celebrate with you.
+        </p>
+
+        <p class="paper-bg">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit
+          enim quaerat animi iure dolor quae vel modi reprehenderit
+          necessitatibus magni quasi odit sequi eaque in, ad nisi dolores
+          consequatur ut.
+          <br />
+          <span class="italic">- Ngọc Hà & Hải Huy</span>
+        </p>
       </section>
 
       <section
-        id="time"
-        class="time normal-margin"
+        id="details"
+        class="flex-center normal-margin"
       >
-        <h2 class="text-header">Thời gian</h2>
-        <p>Hôn lễ sẽ được cử hành vào ngày 9 tháng 11 năm 2025</p>
-        <p class="date">
-          <span> Ngày 9 </span>
-          <span> tháng 11 </span>
-          <span> năm 2025 </span>
-        </p>
-        <div class="calendar-container">
-          <div
-            class="calendar-grid"
-            id="calendarGrid"
-          ></div>
+        <h2 class="text-header">Chi tiết</h2>
+        <div class="paper-bg">
+          <p>Hôn lễ sẽ được cử hành vào</p>
+          <p>Chủ nhật, ngày 9 tháng 11 năm 2025</p>
+          <p>Vào lúc 18:00</p>
+          <p>Tại sảnh Thames, Riverside Palace, phường Vĩnh Hội</p>
         </div>
         <!-- add to calendar drop down, with option for google or ios -->
         <nav
@@ -105,30 +142,30 @@
           ></ul>
         </nav>
       </section>
+      <img
+        src="assets/swan.png"
+        alt="Swan Divider"
+        class="divider"
+      />
 
       <section
         id="location"
         class="location"
       >
         <div class="header">
-          <button
-            class="map-icon text-header"
-            onclick="window.open('https://maps.app.goo.gl/cREXUgRRRUrEYaaL6', '_blank')"
-          >
-            <span
-              class="material-symbols-outlined"
-              style="text-align: center"
-            >
-              moved_location
-            </span>
-          </button>
-          <h1 class="text-header">Địa điểm</h1>
+          <h1 class="text-header">Địa chỉ</h1>
         </div>
-        <p class="address">
+        <a
+          class="address"
+          href="https://maps.app.goo.gl/cREXUgRRRUrEYaaL6"
+          target="_blank"
+          rel="noopener"
+        >
           Địa chỉ : 360D Bến Vân Đồn, phường Vĩnh Hội, Tp. Hồ Chí Minh, sảnh
           Thames
-        </p>
-        <article class="address-content">
+          <span class="material-symbols-outlined"> moved_location </span>
+        </a>
+        <article class="address-image">
           <img
             src="assets/riverside.webp"
             alt="Riverside Palace"
@@ -141,6 +178,96 @@
           <!-- <ul class="timeline-events">
           </ul> -->
         </article>
+      </section>
+
+      <section
+        id="rsvp"
+        class="rsvp normal-margin"
+      >
+        <h2 class="text-header">RSVP</h2>
+        <p>Vui lòng xác nhận tham dự trước ngày 20/10/2025</p>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Tên:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nhập tên của bạn"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone-number">Số điện thoại:</label>
+            <input
+              type="tel"
+              pattern="^(84|0)(3[2-9]|5[689]|7[0679]|8[1-9]|9[0-9])[0-9]{7}$"
+              id="phone-number"
+              name="phone-number"
+              placeholder="Nhập số điện thoại của bạn"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <fieldset id="attendance-options">
+              <legend>Vui lòng xác nhận bạn có thể tham dự…</legend>
+              <label>
+                <input
+                  type="radio"
+                  name="attendance"
+                  value="yes"
+                  required
+                />
+                Mình sẽ tham dự
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="attendance"
+                  value="no"
+                />
+                Mình không thể tham dự
+              </label>
+            </fieldset>
+          </div>
+
+          <p
+            id="attending-thank-you"
+            class="attending-dependent hidden paper-bg"
+          >
+            Cảm ơn bạn đã xác nhận tham dự! Chúng mình rất mong được gặp bạn vào
+            ngày trọng đại.
+          </p>
+
+          <p
+            id="not-attending-thank-you"
+            class="not-attending-dependent hidden paper-bg"
+          >
+            Cảm ơn bạn đã xác nhận không tham dự!
+          </p>
+
+          <div class="not-attending-dependent hidden form-group">
+            <label for="message">Lời nhắn:</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Nhập lời nhắn của bạn"
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-outline hidden submit-button"
+          >
+            Gửi lời nhắn
+          </button>
+        </form>
+
+        <div id="responseMessage"></div>
       </section>
     </main>
   </body>

@@ -9,9 +9,19 @@
 
 /* Remove default margin and padding */
 body,
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-dl, dd, ol, ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
 figure,
 hr,
 fieldset,
@@ -21,7 +31,8 @@ legend {
 }
 
 /* Remove list styles */
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -31,7 +42,14 @@ fieldset {
 }
 
 /* Remove default background and border for images */
-img, svg, video, canvas, audio, iframe, embed, object {
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
   display: block;
   max-width: 100%;
   height: auto;
@@ -46,10 +64,11 @@ table {
 }
 
 /* Remove default button styles */
-button,
+/* button,
 input,
 select,
-textarea {
+textarea 
+{
   font: inherit;
   color: inherit;
   background: none;
@@ -57,11 +76,11 @@ textarea {
   padding: 0;
   margin: 0;
   outline: none;
-}
+} */
 
 /* Remove anchor underline */
 a {
-  text-decoration: none;
+  /* text-decoration: none; */
   color: inherit;
 }
 
@@ -75,6 +94,6 @@ html {
 }
 
 /* Remove focus outlines except for keyboard users */
-:focus:not(:focus-visible) {
+/* :focus:not(:focus-visible) {
   outline: none;
-}
+} */
