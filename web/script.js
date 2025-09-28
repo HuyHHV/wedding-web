@@ -20,7 +20,110 @@ const calendarOptions = [
   },
 ]
 
+function hamburgerMenuToggle() {
+  const hamburger = document.getElementById('hamburger')
+  const navPanel = document.getElementById('nav-panel')
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open')
+    navPanel.classList.toggle('nav-active')
+  })
+}
+
+function updateEventDisplay(location) {
+  const details = eventDetails[location]
+  const dateString = details.start.toLocaleDateString('vi-VN', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+  const timeString = details.start.toLocaleTimeString('vi-VN', {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+
+  // Update displayed date and time
+  // document.querySelector('.date').textContent = dateString
+  document.querySelector('.paper-bg p:nth-child(2)').textContent = dateString
+  document.querySelector('#event-time').textContent = `Vào lúc ${timeString}`
+  document.querySelector(
+    '#event-location'
+  ).textContent = `Tại ${details.locationShortName}`
+
+  // Update address link
+  const addressLink = document.querySelector('.address')
+  if (addressLink) {
+    addressLink.textContent = `Địa chỉ: ${details.location}`
+    if (location === 'hcm') {
+      addressLink.href = 'https://maps.app.goo.gl/cREXUgRRRUrEYaaL6'
+    } else {
+      addressLink.href = 'https://maps.app.goo.gl/qP3PhwiSR5HT2sYw6'
+    }
+  }
+  // update image
+  const eventImage = document.getElementById('locationImage')
+  if (eventImage) {
+    eventImage.src = details.img
+    eventImage.alt = `Image for ${
+      location === 'hcm' ? 'Hồ Chí Minh' : 'Chợ Mới'
+    } location`
+  }
+}
+
+const eventDetails = {
+  title: 'Tiệc cưới Huy & Hà',
+  hcm: {
+    start: new Date(2025, 10, 9, 18, 0),
+    location:
+      '360D Bến Vân Đồn, phường Vĩnh Hội, Tp. Hồ Chí Minh, Riverside Palace, sảnh Thames',
+    locationShortName: 'Riverside Palace, sảnh Thames',
+    img: 'assets/riverside2.png',
+  },
+  cm: {
+    start: new Date(2025, 10, 15, 11, 0),
+    location: 'DT942, khóm Long Hoà, xã Chợ Mới, An Giang, Tuấn Công',
+    locationShortName: 'Tuấn Công, Chợ Mới',
+    img: 'assets/tuancong.png',
+  },
+}
+function createCalendarDropdown() {
+  const menu = document.getElementById('calendarMenu')
+
+  calendarOptions.forEach((option) => {
+    const li = document.createElement('li')
+    li.className = 'calendar-option'
+    li.setAttribute('role', 'none')
+
+    const link = document.createElement('a')
+    link.href = '#'
+    link.className = 'calendar-link'
+    link.setAttribute('role', 'menuitem')
+    link.setAttribute('tabindex', '-1')
+    link.onclick = function (event) {
+      window[option.handler](event)
+    }
+
+    const icon = document.createElement('span')
+    icon.className = 'calendar-icon'
+    icon.setAttribute('aria-hidden', 'true')
+    const img = document.createElement('img')
+    img.src = option.icon
+    img.alt = option.name + ' icon'
+    img.style.width = '20px'
+    img.style.height = '20px'
+    img.style.verticalAlign = 'middle'
+    icon.appendChild(img)
+
+    link.appendChild(icon)
+    link.appendChild(document.createTextNode(option.name))
+    li.appendChild(link)
+    menu.appendChild(li)
+  })
+}
+
 function toggleCalendarDropdown() {
+  console.log('Toggling calendar dropdown')
   const button = document.getElementById('calendarButton')
   const isExpanded = button.getAttribute('aria-expanded') === 'true'
 
@@ -75,17 +178,21 @@ function formatDateForICS(date) {
 
 function addToGoogleCalendar(event) {
   event.preventDefault()
-  const startTime = formatDateForGoogle(eventDetails.start)
+  const selectedLocation = document.querySelector(
+    'input[name="location"]:checked'
+  ).value
+  const details = eventDetails[selectedLocation]
+
+  const startTime = formatDateForGoogle(details.start)
   const endTime = formatDateForGoogle(
-    new Date(eventDetails.start.getTime() + 3600000)
+    new Date(details.start.getTime() + 3600000)
   ) // Add 1 hour
 
   const url =
     `https://calendar.google.com/calendar/render?action=TEMPLATE` +
     `&text=${encodeURIComponent(eventDetails.title)}` +
     `&dates=${startTime}/${endTime}` +
-    `&details=${encodeURIComponent(eventDetails.description)}` +
-    `&location=${encodeURIComponent(eventDetails.location)}`
+    `&location=${encodeURIComponent(details.location)}`
 
   window.open(url, '_blank')
   closeDropdown()
@@ -93,9 +200,14 @@ function addToGoogleCalendar(event) {
 
 function addToOutlook(event) {
   event.preventDefault()
-  const startTime = formatDateForOutlook(eventDetails.start)
+  const selectedLocation = document.querySelector(
+    'input[name="location"]:checked'
+  ).value
+  const details = eventDetails[selectedLocation]
+
+  const startTime = formatDateForOutlook(details.start)
   const endTime = formatDateForOutlook(
-    new Date(eventDetails.start.getTime() + 3600000)
+    new Date(details.start.getTime() + 3600000)
   )
 
   const url =
@@ -103,8 +215,8 @@ function addToOutlook(event) {
     `subject=${encodeURIComponent(eventDetails.title)}` +
     `&startdt=${startTime}` +
     `&enddt=${endTime}` +
-    `&body=${encodeURIComponent(eventDetails.description)}` +
-    `&location=${encodeURIComponent(eventDetails.location)}`
+    `&body=${encodeURIComponent(eventDetails.description || '')}` +
+    `&location=${encodeURIComponent(details.location)}`
 
   window.open(url, '_blank')
   closeDropdown()
@@ -112,10 +224,13 @@ function addToOutlook(event) {
 
 function addToAppleCalendar(event) {
   event.preventDefault()
-  const startTime = formatDateForICS(eventDetails.start)
-  const endTime = formatDateForICS(
-    new Date(eventDetails.start.getTime() + 3600000)
-  )
+  const selectedLocation = document.querySelector(
+    'input[name="location"]:checked'
+  ).value
+  const details = eventDetails[selectedLocation]
+
+  const startTime = formatDateForICS(details.start)
+  const endTime = formatDateForICS(new Date(details.start.getTime() + 3600000))
 
   const icsContent = [
     'BEGIN:VCALENDAR',
@@ -125,8 +240,8 @@ function addToAppleCalendar(event) {
     `DTSTART:${startTime}`,
     `DTEND:${endTime}`,
     `SUMMARY:${eventDetails.title}`,
-    `DESCRIPTION:${eventDetails.description}`,
-    `LOCATION:${eventDetails.location}`,
+    `DESCRIPTION:${eventDetails.description || ''}`,
+    `LOCATION:${details.location}`,
     'STATUS:CONFIRMED',
     'SEQUENCE:0',
     'END:VEVENT',
@@ -142,29 +257,6 @@ function addToAppleCalendar(event) {
   document.body.removeChild(link)
 
   closeDropdown()
-}
-
-const weddingEvents = [
-  { time: '6:00 PM', title: 'Đón khách' },
-  { time: '7:00 PM', title: 'Lễ' },
-  { time: '7:30 PM', title: 'Nhập tiệc' },
-  { time: '8:15 PM', title: 'Mini game và giao lưu' },
-]
-
-function createTimeline() {
-  // const container = document.getElementsByClassName('timeline-events')[0]
-  // weddingEvents.forEach((event) => {
-  //   const timelineItem = document.createElement('li')
-  //   timelineItem.className = 'timeline-item'
-  //   timelineItem.innerHTML = `
-  //                 <div class="event-circle"></div>
-  //                 <div class="event-box">
-  //                     <div class="event-time">${event.time}</div>
-  //                     <div class="event-title">${event.title}</div>
-  //                 </div>
-  //               `
-  //   container.appendChild(timelineItem)
-  // })
 }
 
 const observer = new IntersectionObserver((entries) => {
@@ -232,6 +324,109 @@ function envelop() {
   })
 }
 
+function removeRequiredOfChildren(container) {
+  container.querySelectorAll('input, select, textarea').forEach((input) => {
+    input.removeAttribute('required')
+  })
+}
+
+function randomRotatePaper() {
+  const papers = document.querySelectorAll('.random-rotate')
+  const usedValues = new Set()
+  papers.forEach((paper) => {
+    let randomValue
+    let lastValue = [...usedValues].pop() || 0
+    do {
+      randomValue = Math.random() * 4 * (lastValue >= 0 ? -1 : 1)
+    } while (usedValues.has(randomValue) && randomValue !== 0)
+    usedValues.add(randomValue)
+    paper.style.transform = `rotate(${randomValue}deg)`
+  })
+}
+
+function autoFillNameFromUrl() {
+  console.log('Auto filling name from URL', window.location.search)
+  const urlParams = new URLSearchParams(window.location.search)
+  const nameParam = urlParams.get('name')
+  console.log('Name param:', urlParams)
+  if (nameParam) {
+    const nameInput = document.getElementById('name')
+    if (nameInput) {
+      nameInput.value = decodeURIComponent(nameParam.replace(/\+/g, ' '))
+    }
+  }
+}
+
+function createBankAccountDetails() {
+  const detail = {
+    'Tài khoản': 'Le Truong Ngoc Ha',
+    'Số tài khoản': '1052576182',
+    'Ngân hàng': 'Vietcombank',
+  }
+  const list = document.querySelector('.bank-details')
+  Object.entries(detail).forEach(([key, value]) => {
+    const li = document.createElement('li')
+    const strong = document.createElement('strong')
+    strong.textContent = key + ': ' + value
+    li.appendChild(strong)
+
+    const copyBtn = document.createElement('button')
+    copyBtn.className = 'material-symbols-outlined copy-button'
+    copyBtn.textContent = 'content_copy'
+    copyBtn.addEventListener('click', () => copyToClipboard(copyBtn, value))
+    li.appendChild(copyBtn)
+
+    list.appendChild(li)
+  })
+}
+
+function copyToClipboard(btn, text) {
+  navigator.clipboard.writeText(text).then(
+    () => {
+      showCopiedNotification(btn)
+    },
+    (err) => {
+      console.error('Could not copy text: ', err)
+    }
+  )
+}
+
+function showCopiedNotification(button) {
+  // Remove any existing notification
+  const existingNotification = document.querySelectorAll('.notification')
+  console.log('Existing notification:', existingNotification)
+  existingNotification.forEach((notification) => notification.remove())
+
+  // Create notification element
+  const notification = document.createElement('div')
+  notification.className = 'notification'
+  notification.textContent = 'Copied!'
+
+  // Position the notification above the button
+  notification.style.bottom = '40%'
+  notification.style.left = '50%'
+  notification.style.transform = 'translateX(-50%) translateY(-10px)'
+  notification.style.marginBottom = '10px'
+
+  // Add notification to button (relative positioning)
+  button.appendChild(notification)
+
+  // Show notification with animation
+  setTimeout(() => {
+    notification.classList.add('show')
+  }, 10)
+
+  // Hide and remove notification after 5 seconds
+  setTimeout(() => {
+    notification.classList.remove('show')
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification)
+      }
+    }, 300) // Wait for fade out animation
+  }, 1500)
+}
+
 document
   .getElementById('attendance-options')
   .addEventListener('change', (e) => {
@@ -239,16 +434,26 @@ document
     const isAttending = e.target.value === 'yes'
 
     document
-      .querySelectorAll('.attending-dependent, .submit-button')
-      .forEach((el) => el.classList.toggle('hidden', !isAttending))
+      .querySelectorAll('.submit-button')
+      .forEach((el) => el.classList.toggle('hidden', false))
 
-    document
-      .querySelectorAll('.not-attending-dependent')
-      .forEach((el) => el.classList.toggle('hidden', isAttending))
+    document.querySelectorAll('.attending-dependent').forEach((el) => {
+      el.classList.toggle('hidden', !isAttending)
+      if (!isAttending) {
+        removeRequiredOfChildren(el)
+      }
+    })
+
+    document.querySelectorAll('.not-attending-dependent').forEach((el) => {
+      el.classList.toggle('hidden', isAttending)
+      if (isAttending) {
+        removeRequiredOfChildren(el)
+      }
+    })
   })
 
 const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbxFtrHSyY4WYMN4EceFpdRdSq2vBoldJJGwpmdM1DAd7CJl18w2WaZ8aUJptiqjwjXQ/exec'
+  'https://script.google.com/macros/s/AKfycbwr2zvDF4MQoG_vXsPu8prGUml_Kpo3LuLJQX91xiMz8YsrhkAXPcRBRcBS95Z8dBnt/exec'
 
 document
   .getElementById('contactForm')
@@ -266,10 +471,20 @@ document
 
     try {
       // Collect form data
+      const locations = Array.from(
+        document.querySelectorAll('input[name="attending-location"]:checked')
+      )
+        .map((cb) => cb.value)
+        .join(', ')
+
       const formData = {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone-number').value,
-        message: document.getElementById('message').value,
+        attendance:
+          document.querySelector('input[name="attendance"]:checked')?.value ||
+          '',
+        attendingLocations: locations,
+        message: document.getElementById('message')?.value || '',
       }
 
       // Send to Google Apps Script
@@ -287,7 +502,7 @@ document
       if (result.success) {
         responseDiv.innerHTML =
           '<div class="message success">Message sent successfully!</div>'
-        document.getElementById('contactForm').reset()
+        // Form will retain its values unless you want to reset it
       } else {
         throw new Error(result.error || 'Unknown error occurred')
       }
@@ -299,12 +514,23 @@ document
       // Reset button
       submitButton.disabled = false
       submitButton.textContent = 'Send Message'
+
+      return false
     }
   })
+// Location selection handler
+document.getElementById('location-options')?.addEventListener('change', (e) => {
+  if (!e.target.name || e.target.name !== 'location') return
+  updateEventDisplay(e.target.value)
+})
 
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   envelop()
-  // Repeat the animation every 2.5 seconds
-  createTimeline()
+  createCalendarDropdown()
+  randomRotatePaper()
+  hamburgerMenuToggle()
+  autoFillNameFromUrl()
+  updateEventDisplay('hcm')
+  createBankAccountDetails()
 })

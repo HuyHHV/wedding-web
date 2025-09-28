@@ -13,6 +13,10 @@
     />
     <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=content_copy"
+    />
+    <link
+      rel="stylesheet"
       href="reset.css"
     />
     <link
@@ -51,6 +55,32 @@
       </div>
     </div> -->
     <main>
+      <nav class="hamburger-nav is-mobile">
+        <div
+          class="hamburger"
+          id="hamburger"
+        >
+          <div class="hamburger_btn"></div>
+        </div>
+        <ul
+          class="nav-panel blended-image fade-vertical fade-both"
+          id="nav-panel"
+        >
+          <li class="nav-button">
+            <a href="#details">Save the date</a>
+          </li>
+          <li class="nav-button">
+            <a href="#locations">Địa điểm</a>
+          </li>
+          <li class="nav-button">
+            <a href="#location">Chi tiết</a>
+          </li>
+          <li class="nav-button">
+            <a href="#rsvp">RSVP</a>
+          </li>
+        </ul>
+      </nav>
+
       <section
         id="home"
         class="hero normal-margin"
@@ -60,15 +90,17 @@
         </h1>
         <p>Thân mời bạn tới tham dự buổi tiệc chung vui cùng chúng mình</p>
       </section>
-      <section class="hero-image-container normal-margin">
-        <img
-          src="assets/hero-image.webp"
-          alt="Hero Image"
-          class="hero-image fade-all-edges blended-image fade-vertical"
+      <section class="hero-image-container margin-x-auto">
+        <video
+          src="assets/intro.mp4"
+          autoplay
+          muted
+          loop
+          class="hero-video margin-x-auto"
         />
       </section>
       <img
-        src="assets/swan.png"
+        src="assets/swan2.png"
         alt="Swan Divider"
         class="divider"
       />
@@ -87,33 +119,73 @@
       </div>
 
       <section class="save-the-date normal-margin flex-center">
-        <h2 class="text-header">Save the date</h2>
-        <p class="date">Ngày 9 | tháng 11 | năm 2025</p>
-        <p>
-          Thank you for being part of our special day! We can't wait to
-          celebrate with you.
-        </p>
-
-        <p class="paper-bg">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit
-          enim quaerat animi iure dolor quae vel modi reprehenderit
-          necessitatibus magni quasi odit sequi eaque in, ad nisi dolores
-          consequatur ut.
+        <p class="paper-bg random-rotate">
+          <strong class="text-lg margin-x-auto">Lời ngỏ</strong>
+          Sau nhiều ngày tháng bên nhau,
+          <br />
+          tụi mình quyết định viết tiếp hành trình này bằng một ngày thật đặc
+          biệt.
+          <br />
+          Tụi mình mong sẽ có bạn cùng hiện diện, cùng cười, cùng chúc mừng và
+          cùng tạo thêm những kỷ niệm khó quên.
           <br />
           <span class="italic">- Ngọc Hà & Hải Huy</span>
         </p>
       </section>
+
+      <img
+        src="assets/swan2.png"
+        alt="Swan Divider"
+        class="divider"
+      />
+
+      <section
+        id="locations"
+        class="flex-center"
+      >
+        <h2 class="text-header">Chọn Địa Điểm</h2>
+        <fieldset id="location-options">
+          <label>
+            <input
+              type="radio"
+              name="location"
+              value="hcm"
+              checked
+            />
+            tiệc Tp. Hồ Chí Minh
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="location"
+              value="cm"
+              required
+            />
+            tiệc Chợ Mới
+          </label>
+        </fieldset>
+      </section>
+
+      <!-- <img
+        src="assets/swan2.png"
+        alt="Swan Divider"
+        class="divider"
+      /> -->
 
       <section
         id="details"
         class="flex-center normal-margin"
       >
         <h2 class="text-header">Chi tiết</h2>
-        <div class="paper-bg">
-          <p>Hôn lễ sẽ được cử hành vào</p>
+
+        <!-- <p class="date text-md">Ngày 9, tháng 11, năm 2025</p> -->
+        <div class="paper-bg random-rotate">
+          <strong class="text-lg margin-x-auto">Save the date</strong>
           <p>Chủ nhật, ngày 9 tháng 11 năm 2025</p>
-          <p>Vào lúc 18:00</p>
-          <p>Tại sảnh Thames, Riverside Palace, phường Vĩnh Hội</p>
+          <strong id="event-time">Vào lúc 18:00</strong>
+          <p id="event-location">
+            Tại sảnh Thames, Riverside Palace, phường Vĩnh Hội, Tp. Hồ Chí Minh
+          </p>
         </div>
         <!-- add to calendar drop down, with option for google or ios -->
         <nav
@@ -143,7 +215,7 @@
         </nav>
       </section>
       <img
-        src="assets/swan.png"
+        src="assets/swan2.png"
         alt="Swan Divider"
         class="divider"
       />
@@ -167,17 +239,30 @@
         </a>
         <article class="address-image">
           <img
-            src="assets/riverside.webp"
-            alt="Riverside Palace"
-            style="height: 100%"
-            class="fade-all-edges blended-image fade-vertical"
+            id="locationImage"
+            src="assets/riverside2.png"
+            alt="dia diem to chuc tiec"
+            class="fade-all-edges blended-image fade-vertical margin-x-auto"
           />
-          <div class="timeline-container">
-            <!-- <div class="timeline-line"></div> -->
-          </div>
-          <!-- <ul class="timeline-events">
-          </ul> -->
         </article>
+      </section>
+
+      <section
+        id="bank"
+        class="bank"
+      >
+        <div class="header">
+          <h1 class="text-header">Mừng cưới cô dâu chú rể</h1>
+        </div>
+        <ul class="margin-x-auto bank-details">
+          <li class="qr">
+            <img
+              width="200"
+              src="assets/qr.jpeg"
+              alt=""
+            />
+          </li>
+        </ul>
       </section>
 
       <section
@@ -233,22 +318,48 @@
             </fieldset>
           </div>
 
+          <div class="form-group attending-dependent hidden">
+            <fieldset id="location-attendance">
+              <legend>Bạn sẽ tham dự tiệc ở...</legend>
+              <label>
+                <input
+                  type="checkbox"
+                  name="attending-location"
+                  value="hcm"
+                  class="location-checkbox"
+                />
+                tiệc Tp. Hồ Chí Minh
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="attending-location"
+                  value="cm"
+                  class="location-checkbox"
+                />
+                tiệc Chợ Mới
+              </label>
+            </fieldset>
+          </div>
+
           <p
             id="attending-thank-you"
-            class="attending-dependent hidden paper-bg"
+            class="attending-dependent hidden paper-bg mb-2"
           >
-            Cảm ơn bạn đã xác nhận tham dự! Chúng mình rất mong được gặp bạn vào
-            ngày trọng đại.
+            Một lần nữa, tụi mình chân thành cảm ơn vì bạn đã và luôn là một
+            phần trong hành trình yêu thương, chứng kiến những khoảnh khắc đáng
+            nhớ nhất của hai đứa.
           </p>
 
           <p
             id="not-attending-thank-you"
             class="not-attending-dependent hidden paper-bg"
           >
-            Cảm ơn bạn đã xác nhận không tham dự!
+            Tiếc quá vì không có bạn trong ngày đặc biệt, nhưng tụi mình vẫn rất
+            trân trọng tình cảm bạn dành cho hai đứa 💕
           </p>
 
-          <div class="not-attending-dependent hidden form-group">
+          <div class="not-attending-dependent hidden form-group mb-2">
             <label for="message">Lời nhắn:</label>
             <textarea
               id="message"
