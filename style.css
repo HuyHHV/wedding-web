@@ -27,7 +27,8 @@
 }
 
 .text-title {
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 .text-underline {
@@ -1005,6 +1006,17 @@ input[type="radio"]:checked::after {
   /* your white */
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  color: var(--charcoal-2);
+  font-size: 0.875rem;
+}
+
+footer p {
+  text-align: center;
 }
 
 @media (min-width: 769px) {

@@ -453,7 +453,7 @@ document
   })
 
 const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbwr2zvDF4MQoG_vXsPu8prGUml_Kpo3LuLJQX91xiMz8YsrhkAXPcRBRcBS95Z8dBnt/exec'
+  'https://script.google.com/macros/s/AKfycbxuF6PhXVOHjtZOkkn2pccVAzao1TXtsFIicR_ACzGdyJdDUSdwijOzddoMuiXUHoZO/exec'
 
 document
   .getElementById('contactForm')
@@ -465,9 +465,7 @@ document
 
     // Show loading state
     submitButton.disabled = true
-    submitButton.textContent = 'Sending...'
-    responseDiv.innerHTML =
-      '<div class="message loading">Sending your message...</div>'
+    submitButton.textContent = 'Đang gửi lời nhắn..'
 
     try {
       // Collect form data
@@ -500,21 +498,19 @@ document
       const result = await response.json()
 
       if (result.success) {
-        responseDiv.innerHTML =
-          '<div class="message success">Message sent successfully!</div>'
-        // Form will retain its values unless you want to reset it
+        submitButton.textContent = 'Gửi lời nhắn thành công! Cảm ơn bạn'
       } else {
+        submitButton.disabled = false
+        submitButton.textContent = 'Lỗi gửi lời nhắn, thử lại?'
         throw new Error(result.error || 'Unknown error occurred')
       }
     } catch (error) {
       console.error('Error:', error)
-      responseDiv.innerHTML =
-        '<div class="message error">Error sending message. Please try again.</div>'
-    } finally {
-      // Reset button
+      // responseDiv.innerHTML =
+      //   '<div class="message error">Error sending message. Please try again.</div>'
       submitButton.disabled = false
-      submitButton.textContent = 'Send Message'
-
+      submitButton.textContent = 'Lỗi gửi lời nhắn, thử lại?'
+    } finally {
       return false
     }
   })
