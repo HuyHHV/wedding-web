@@ -123,7 +123,6 @@ function createCalendarDropdown() {
 }
 
 function toggleCalendarDropdown() {
-  console.log('Toggling calendar dropdown')
   const button = document.getElementById('calendarButton')
   const isExpanded = button.getAttribute('aria-expanded') === 'true'
 
@@ -270,6 +269,14 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(document.querySelector('.divider'))
 
 function envelop() {
+  const alreadyOpened = localStorage.getItem('envelopeOpened')
+  if (alreadyOpened === 'true') {
+    const envelopeOverlay = document.getElementById('envelopeOverlay')
+    if (envelopeOverlay) {
+      envelopeOverlay.remove()
+    }
+    return
+  }
   const envelopeOverlay = document.getElementById('envelopeOverlay')
   if (!envelopeOverlay) return
   const envelopeContainer = document.getElementById('envelopeContainer')
@@ -300,6 +307,9 @@ function envelop() {
   }
 
   envelopeContainer.addEventListener('click', function (e) {
+    localStorage.setItem('envelopeOpened', 'true')
+
+
     // Prevent multiple clicks during animation
     if (envelopeContainer.classList.contains('opening')) return
 
@@ -345,10 +355,8 @@ function randomRotatePaper() {
 }
 
 function autoFillNameFromUrl() {
-  console.log('Auto filling name from URL', window.location.search)
   const urlParams = new URLSearchParams(window.location.search)
   const nameParam = urlParams.get('name')
-  console.log('Name param:', urlParams)
   if (nameParam) {
     const nameInput = document.getElementById('name')
     if (nameInput) {
@@ -366,6 +374,7 @@ function createBankAccountDetails() {
   const list = document.querySelector('.bank-details')
   Object.entries(detail).forEach(([key, value]) => {
     const li = document.createElement('li')
+    li.className = 'margin-x-auto bank-detail-item'
     const strong = document.createElement('strong')
     strong.textContent = key + ': ' + value
     li.appendChild(strong)
@@ -394,7 +403,6 @@ function copyToClipboard(btn, text) {
 function showCopiedNotification(button) {
   // Remove any existing notification
   const existingNotification = document.querySelectorAll('.notification')
-  console.log('Existing notification:', existingNotification)
   existingNotification.forEach((notification) => notification.remove())
 
   // Create notification element

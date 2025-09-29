@@ -30,7 +30,7 @@
   </head>
   <body>
     <!-- Envelope overlay -->
-    <!-- <div
+    <div
       class="envelope-overlay"
       id="envelopeOverlay"
     >
@@ -53,7 +53,7 @@
         </div>
         <div class="click-instruction">Bạn có một thư mời</div>
       </div>
-    </div> -->
+    </div>
     <main>
       <nav class="hamburger-nav is-mobile">
         <div
@@ -105,11 +105,6 @@
           />
         </video>
       </section>
-      <img
-        src="assets/swan1.png"
-        alt="Swan Divider"
-        class="divider"
-      />
 
       <!-- nav bar go here -->
       <div class="navigation-bar">
@@ -123,6 +118,11 @@
           <a href="#rsvp">RSVP</a>
         </h1>
       </div>
+      <img
+        src="assets/swan1.png"
+        alt="Swan Divider"
+        class="divider"
+      />
 
       <section class="save-the-date normal-margin flex-center">
         <p class="paper-bg random-rotate">
@@ -171,12 +171,6 @@
           </label>
         </fieldset>
       </section>
-
-      <!-- <img
-        src="assets/swan2.png"
-        alt="Swan Divider"
-        class="divider"
-      /> -->
 
       <section
         id="details"
@@ -264,6 +258,7 @@
           <li class="qr">
             <img
               width="200"
+              class="margin-x-auto"
               src="assets/qr.jpeg"
               alt=""
             />
@@ -271,13 +266,29 @@
         </ul>
       </section>
 
+      <img
+        src="assets/swan1.png"
+        alt="Swan Divider"
+        class="divider"
+      />
+
       <section
         id="rsvp"
-        class="rsvp normal-margin"
+        class="rsvp normal-margin margin-x-auto"
       >
-        <h2 class="text-header">RSVP</h2>
-        <p>Vui lòng xác nhận tham dự trước ngày 20/10/2025</p>
-        <form id="contactForm">
+        <h2
+          class="text-header"
+          style="text-align: center"
+        >
+          RSVP
+        </h2>
+        <p style="text-align: center">
+          Vui lòng xác nhận tham dự trước ngày 20/10/2025
+        </p>
+        <form
+          id="contactForm"
+          class="margin-x-auto"
+        >
           <div class="form-group">
             <label for="name">Tên:</label>
             <input
@@ -388,7 +399,7 @@
       </section>
 
       <footer>
-        <p class="text-sm text-center">Made with ❤️ and ☕ by Hải Huy</p>
+        <p class="text-sm text-center">Made with ❤️ by Hải Huy</p>
       </footer>
     </main>
   </body>

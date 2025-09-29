@@ -2,32 +2,33 @@
 
 /* Standard text sizes */
 .text-xs {
-  font-size: 0.75rem;
+  font-size: 1rem;
   /* 12px */
 }
 
 .text-sm {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   /* 14px */
 }
 
 .text-md {
-  font-size: 1rem;
+  font-size: 1.25rem;
   /* 16px */
 }
 
 .text-lg {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   /* 20px */
 }
 
 .text-header {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
 }
 
 .text-title {
-  font-size: 3rem;
+  /* This will fluidly scale the font size between 2rem and 3.25rem based on viewport width */
+  font-size: clamp(2rem, 1rem + 4vw, 3.25rem);
   font-weight: 700;
 }
 
@@ -69,7 +70,7 @@ button:active {
   --charcoal: #2c2c2c;
   --charcoal-2: #2c2c2c80;
   --charcoal-3: #f9cdd5;
-  --warm-grey: #6f7949;
+  --warm-grey: #9aa767;
   --bg: var(--white);
   --text: var(--charcoal-3);
   --muted: var(--charcoal-2);
@@ -91,6 +92,7 @@ body {
   background: radial-gradient(1000px 600px at 50% -20%, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0) 60%),
     repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.018), rgba(0, 0, 0, 0.018) 1px, transparent 1px, transparent 3px),
     var(--white);
+  font-size: 1.25rem;
 }
 
 * {
@@ -266,13 +268,21 @@ section {
 
 .names {
   letter-spacing: .2px;
-  /* padding-top: 2rem; */
-  /* font-family: 'Garlicha', cursive, serif; */
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem;
+  /* Fluid typography that scales with viewport width */
+  font-size: clamp(2rem, 1rem + 4vw, 3.25rem);
 }
 
 .and {
   opacity: .7;
   margin: 0 6px;
+  display: inline-block;
 }
 
 .divider {
@@ -350,6 +360,14 @@ section {
 .bank-details {
   /* text-align: center; */
   width: fit-content;
+}
+
+.bank-detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .qr {
@@ -852,6 +870,7 @@ section {
 #contactForm {
   display: flex;
   flex-direction: column;
+  max-width: 700px;
 }
 
 #contactForm .form-group {
@@ -861,7 +880,7 @@ section {
 }
 
 #contactForm label {
-  font-size: .95rem;
+  font-size: 1.25rem;
   color: var(--text);
   font-weight: 600;
 }
