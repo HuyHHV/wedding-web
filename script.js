@@ -53,14 +53,18 @@ function updateEventDisplay(location) {
 
   // Update address link
   const addressLink = document.querySelector('.address')
+  const mapLink = document.getElementById('mapLink')
   if (addressLink) {
-    addressLink.textContent = `Địa chỉ: ${details.location}`
+    addressLink.textContent = `${details.location}`
     if (location === 'hcm') {
       addressLink.href = 'https://maps.app.goo.gl/cREXUgRRRUrEYaaL6'
+      mapLink.href = 'https://maps.app.goo.gl/cREXUgRRRUrEYaaL6'
     } else {
       addressLink.href = 'https://maps.app.goo.gl/qP3PhwiSR5HT2sYw6'
+      mapLink.href = 'https://maps.app.goo.gl/qP3PhwiSR5HT2sYw6'
     }
   }
+
   // update image
   const eventImage = document.getElementById('locationImage')
   if (eventImage) {
@@ -76,14 +80,14 @@ const eventDetails = {
   hcm: {
     start: new Date(2025, 10, 9, 18, 0),
     location:
-      '360D Bến Vân Đồn, phường Vĩnh Hội, Tp. Hồ Chí Minh, Riverside Palace, sảnh Thames',
+      'Riverside Palace, sảnh Thames, 360D Bến Vân Đồn, phường Vĩnh Hội, Tp. Hồ Chí Minh',
     locationShortName: 'Riverside Palace, sảnh Thames',
     img: 'assets/riverside2.png',
   },
   cm: {
     start: new Date(2025, 10, 15, 11, 0),
-    location: 'DT942, khóm Long Hoà, xã Chợ Mới, An Giang, Tuấn Công',
-    locationShortName: 'Tuấn Công, Chợ Mới',
+    location: 'Nhà hàng Tuấn Công, DT942, khóm Long Hoà, xã Chợ Mới, An Giang',
+    locationShortName: 'Nhà hàng Tuấn Công, Chợ Mới',
     img: 'assets/tuancong.png',
   },
 }
@@ -308,7 +312,6 @@ function envelop() {
 
   envelopeContainer.addEventListener('click', function (e) {
     localStorage.setItem('envelopeOpened', 'true')
-
 
     // Prevent multiple clicks during animation
     if (envelopeContainer.classList.contains('opening')) return

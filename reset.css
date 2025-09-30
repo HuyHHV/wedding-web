@@ -80,7 +80,7 @@ textarea
 
 /* Remove anchor underline */
 a {
-  /* text-decoration: none; */
+  text-decoration: none;
   color: inherit;
 }
 

@@ -348,6 +348,11 @@ section {
   text-align: center;
 }
 
+.save-the-date {
+  margin: 0px;
+  padding: 0px;
+}
+
 #locations {
   margin-bottom: 0px;
   padding-bottom: 0px
@@ -520,7 +525,8 @@ section {
 
 .address {
   padding: 0 2rem;
-  margin: auto
+  margin: auto;
+  text-decoration: none;
 }
 
 .address-image {
@@ -584,38 +590,6 @@ section {
 .col {
   display: flex;
   flex-direction: column;
-}
-
-.main-content {
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--charcoal) 0%, var(--warm-grey) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Arial', sans-serif;
-}
-
-.website-content {
-  text-align: center;
-  color: var(--white);
-  max-width: 800px;
-  padding: 2rem;
-}
-
-.website-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease-out 2s forwards;
-}
-
-.website-content p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease-out 2.2s forwards;
 }
 
 /* Envelope overlay */
