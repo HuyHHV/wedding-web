@@ -348,6 +348,10 @@ section {
   text-align: center;
 }
 
+.guess-name-placeholder {
+  font-weight: bold;
+}
+
 .save-the-date {
   margin: 0px;
   padding: 0px;

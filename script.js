@@ -1,3 +1,24 @@
+// Validate that at least one location checkbox is selected
+function validateLocationCheckboxes() {
+  const checkboxes = document.querySelectorAll(
+    'input[name="attending-location"]'
+  )
+  const isAnyChecked = Array.from(checkboxes).some((cb) => cb.checked)
+
+  checkboxes.forEach((cb) => {
+    if (!isAnyChecked) {
+      cb.setCustomValidity('Vui lòng chọn ít nhất một địa điểm')
+    } else {
+      cb.setCustomValidity('')
+    }
+  })
+
+  // If at least one is checked, make sure to report validity to clear any previous error messages
+  if (isAnyChecked) {
+    checkboxes[0].reportValidity()
+  }
+}
+
 // Set your desired date here
 const targetDate = new Date(2025, 10, 9, 18, 0) // Year, Month (0-11), Day, Hour, Minute
 // Or use: const targetDate = new Date('2025-08-10');
@@ -362,9 +383,14 @@ function autoFillNameFromUrl() {
   const nameParam = urlParams.get('name')
   if (nameParam) {
     const nameInput = document.getElementById('name')
-    if (nameInput) {
-      nameInput.value = decodeURIComponent(nameParam.replace(/\+/g, ' '))
-    }
+    const name = decodeURIComponent(nameParam.replace(/\+/g, ' '))
+    nameInput.value = name
+    const receiverName = document.querySelector('.click-instruction')
+    receiverName.textContent = `Thân mời ${nameInput.value}`
+    const guessNamePlaceHolder = document.querySelector(
+      '.guess-name-placeholder'
+    )
+    guessNamePlaceHolder.textContent = nameInput.value
   }
 }
 
@@ -452,6 +478,12 @@ document
       el.classList.toggle('hidden', !isAttending)
       if (!isAttending) {
         removeRequiredOfChildren(el)
+      } else {
+        // If attending, make sure at least one location is required
+        const checkboxes = el.querySelectorAll('input[type="checkbox"]')
+        checkboxes.forEach((cb) => {
+          cb.addEventListener('change', validateLocationCheckboxes)
+        })
       }
     })
 
@@ -470,6 +502,22 @@ document
   .getElementById('contactForm')
   .addEventListener('submit', async function (e) {
     e.preventDefault()
+
+    // Check if user is attending and validate location selection
+    const isAttending =
+      document.querySelector('input[name="attendance"]:checked')?.value ===
+      'yes'
+    if (isAttending) {
+      const checkboxes = document.querySelectorAll(
+        'input[name="attending-location"]'
+      )
+      const isAnyChecked = Array.from(checkboxes).some((cb) => cb.checked)
+      if (!isAnyChecked) {
+        checkboxes[0].setCustomValidity('Vui lòng chọn ít nhất một địa điểm')
+        checkboxes[0].reportValidity()
+        return
+      }
+    }
 
     const responseDiv = document.getElementById('responseMessage')
     const submitButton = e.target.querySelector('button[type="submit"]')
@@ -533,11 +581,11 @@ document.getElementById('location-options')?.addEventListener('change', (e) => {
 
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+  autoFillNameFromUrl()
   envelop()
   createCalendarDropdown()
   randomRotatePaper()
   hamburgerMenuToggle()
-  autoFillNameFromUrl()
   updateEventDisplay('hcm')
   createBankAccountDetails()
 })
